@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Niam's Christmas Phone Request — Run Me</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1: #081229;
+  --bg2: #10243a;
+  --card: rgba(255,255,255,0.06);
+  --accent: #ff4d4d;
+  --accent2: #ffd166;
+  --ice: #9be7ff;
+  --glass: rgba(255,255,255,0.06);
+}
+
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(255,255,255,0.02), transparent),
+              linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+  color: #e7f0ff;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow:auto;
+  padding:40px;
+}
+
+/* Main layout */
+.stage{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap:28px;
+  align-items:start;
+}
+
+/* Left: pitch card */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:18px;
+  padding:30px;
+  box-shadow: 0 10px 40px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  backdrop-filter: blur(6px);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Floating garland */
+.garland{
+  position:absolute;
+  left:0;right:0;top:-30px;height:140px;
+  background: radial-gradient(circle at 10% 40%, rgba(0,0,0,0.2), transparent),
+              linear-gradient(90deg, rgba(10,20,10,0.3), rgba(30,10,20,0.0));
+  pointer-events:none;
+  transform:translateY(-6px);
+  animation: floatSlow 6s ease-in-out infinite alternate;
+}
+@keyframes floatSlow{from{transform:translateY(-6px)}to{transform:translateY(6px)}}
+
+/* Header */
+.header{
+  display:flex;gap:20px;align-items:center;margin-bottom:10px;
+}
+.logo{
+  width:84px;height:84px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff8a8a);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:28px;color:#fff;
+  box-shadow: 0 6px 20px rgba(255,77,77,0.2);
+  transform:rotate(-6deg);
+}
+.title h1{font-family:'Montserrat', sans-serif;font-size:28px;margin-bottom:6px;letter-spacing:0.2px}
+.title p{opacity:0.85;font-size:14px}
+
+/* Hero image (phone mockup) */
+.hero{
+  margin-top:18px;
+  display:flex;gap:18px;align-items:center;
+}
+.mockup{
+  width:220px;height:420px;border-radius:28px;background:linear-gradient(180deg,#0b1a2a,#0f2436);
+  border:1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 20px 80px rgba(2,6,23,0.7), 0 6px 18px rgba(0,0,0,0.6);
+  position:relative;padding:18px;
+  transform-origin:center;
+  animation:popIn 900ms cubic-bezier(.2,.9,.3,1);
+}
+@keyframes popIn{from{transform:scale(.88) translateY(12px);opacity:0}to{transform:none;opacity:1}}
+
+.screen{
+  width:100%;height:100%;border-radius:18px;background:linear-gradient(180deg,#071221,#062538);
+  display:flex;align-items:center;justify-content:center;color:#9be7ff;font-weight:600;font-size:18px;
+  box-shadow: inset 0 2px 6px rgba(255,255,255,0.02);
+}
+
+/* Right column: checklist and reasons */
+.side{
+  position:relative;
+  align-self:start;
+}
+.panel{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:14px;padding:18px;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.5);
+}
+.kicker{font-size:13px;color:var(--accent2);font-weight:700;letter-spacing:0.6px}
+.small{font-size:13px;color:rgba(255,255,255,0.8)}
+
+/* Checklist */
+.checklist{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.item{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(90deg, rgba(255,255,255,0.01), transparent);padding:10px;border-radius:10px}
+.checkbox{width:28px;height:28px;border-radius:7px;border:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02))}
+.item h4{font-size:15px;margin-bottom:4px}
+.item p{font-size:13px;color:rgba(255,255,255,0.85)}
+
+/* Reasons long section */
+.reasons{margin-top:18px}
+.reasons h3{font-family:'Montserrat',sans-serif;color:var(--ice);margin-bottom:10px}
+.reason{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:14px;border-radius:10px;margin-bottom:10px;box-shadow: 0 6px 18px rgba(2,6,23,0.35);transform-origin:left;animation:slideLeft 700ms cubic-bezier(.2,.9,.3,1) both}
+@keyframes slideLeft{from{opacity:0;transform:translateX(-30px) scale(.995)} to{opacity:1;transform:none}}
+
+/* Footer callout */
+.callout{
+  display:flex;gap:12px;align-items:center;margin-top:14px;padding:12px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  border:1px solid rgba(255,255,255,0.03);
+}
+
+/* Twinkling lights across top */
+.twinkles{position:absolute;left:0;right:0;top:0;height:20px;pointer-events:none;overflow:visible}
+.twinkle{position:absolute;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 8px rgba(255,209,102,0.8);opacity:0;animation:twinkle 2.2s linear infinite}
+@keyframes twinkle{0%{opacity:0;transform:scale(.6)}50%{opacity:1;transform:scale(1.2)}100%{opacity:0;transform:scale(.6)}}
+
+/* Presents and footer */
+.presents{display:flex;gap:10px;margin-top:18px;justify-content:flex-start;flex-wrap:wrap}
+.present{width:86px;height:86px;border-radius:12px;background:linear-gradient(180deg,#ff4d4d,#ff8a8a);display:flex;align-items:center;justify-content:center;font-weight:800;color:white;box-shadow: 0 14px 40px rgba(255,77,77,0.12);transform:rotate(-6deg);}
+.footer-note{margin-top:20px;font-size:13px;color:rgba(255,255,255,0.75);text-align:left}
+
+/* Snow canvas overlay */
+#snow-canvas{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:2}
+
+/* Buttons */
+.cta{display:inline-block;margin-top:14px;background:linear-gradient(90deg,var(--accent),#ff8a8a);padding:12px 18px;border-radius:12px;color:white;text-decoration:none;font-weight:700;box-shadow: 0 8px 30px rgba(255,77,77,0.18);border:0;cursor:pointer;transition:transform .18s ease}
+.cta:hover{transform:translateY(-6px) scale(1.02)}
+
+/* Responsive */
+@media (max-width:980px){
+  .stage{grid-template-columns:1fr; padding:12px}
+  .mockup{width:180px;height:360px}
+  body{padding:18px}
+}
+</style>
+</head>
+<body>
+<canvas id="snow-canvas"></canvas>
+
+<div class="stage" role="main" aria-labelledby="main-title">
+  <section class="card" aria-label="Request card">
+    <div class="garland" aria-hidden="true"></div>
+    <div class="twinkles" aria-hidden="true">
+      <!-- Generate some twinkle dots -->
+      <div class="twinkle" style="left:6%;animation-delay:.1s;background:#ffd166"></div>
+      <div class="twinkle" style="left:18%;animation-delay:.4s;background:#ffd166"></div>
+      <div class="twinkle" style="left:34%;animation-delay:.6s;background:#9be7ff"></div>
+      <div class="twinkle" style="left:52%;animation-delay:.9s;background:#ffb3b3"></div>
+      <div class="twinkle" style="left:70%;animation-delay:1.1s;background:#ffd166"></div>
+      <div class="twinkle" style="left:86%;animation-delay:1.4s;background:#9be7ff"></div>
+    </div>
+
+    <div class="header">
+      <div class="logo">NI</div>
+      <div class="title">
+        <h1 id="main-title">Niam's Christmas Phone Request</h1>
+        <p>Polite. Responsible. Creative. Here’s why a phone will help me grow.</p>
+      </div>
+    </div>
+
+    <div class="hero" aria-hidden="true">
+      <div class="mockup" role="img" aria-label="Phone mockup">
+        <div class="screen">Imagine a Phone Here — for Docs, Troop, Projects</div>
+      </div>
+
+      <div style="flex:1">
+        <div class="kicker small">Top items I'd use</div>
+        <div class="presents" aria-hidden="true">
+          <div class="present">iPhone</div>
+          <div class="present" style="background:linear-gradient(180deg,#5aa1ff,#7ec8ff)">AirPods</div>
+          <div class="present" style="background:linear-gradient(180deg,#ffd166,#ffb85a)">Tripod</div>
+          <div class="present" style="background:linear-gradient(180deg,#9be7ff,#6fdfff);color:#01324f">Discord</div>
+        </div>
+        <p class="small" style="margin-top:12px">If you pick one, I promise to follow rules, limit apps, and use it mainly for troop responsibilities, learning, and creative work.</p>
+        <a class="cta" href="#reasons">Read my full reasons →</a>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <div class="kicker small">A couple quick commitments I make:</div>
+      <ul style="margin-top:10px;list-style:disc;padding-left:18px;color:rgba(255,255,255,0.85)">
+        <li>Screen time limits you choose — I will follow them.</li>
+        <li>I will share passwords and let you set parental controls.</li>
+        <li>If I misuse it, we will pause privileges until fixed.</li>
+      </ul>
+    </div>
+
+    <div class="footer-note">
+      <strong>Extra:</strong> I already completed the 30-day electronic detox and proved I can manage without a phone when needed. I want this phone to be a tool — not a distraction.
+    </div>
+  </section>
+
+  <aside class="side">
+    <div class="panel">
+      <div class="kicker">Why I want a phone</div>
+      <div class="checklist" aria-live="polite">
+        <div class="item"><div class="checkbox">1</div><div><h4>Troop Communication</h4><p>As a member of the cabinet, Discord helps me coordinate fast with patrol leaders, check schedules, and respond to changes. A phone makes this instant and reliable.</p></div></div>
+
+        <div class="item"><div class="checkbox">2</div><div><h4>Creative Projects</h4><p>I want to make videos, use the tripod, edit short clips, and learn video editing apps. This helps with YouTube shorts or troop presentations.</p></div></div>
+
+        <div class="item"><div class="checkbox">3</div><div><h4>Photography & Memories</h4><p>I would use the camera to document events, projects, and friends — learning photography and building a visual portfolio for school and Scouts.</p></div></div>
+
+        <div class="item"><div class="checkbox">4</div><div><h4>Limited & Useful Apps</h4><p>I will only have a few apps: Canvas (school), Discord (troop), Clash Royale (one free game), and a few learning or creative apps. No random apps or social feeds without permission.</p></div></div>
+
+        <div class="item"><div class="checkbox">5</div><div><h4>Safety & Emergency</h4><p>Having a phone is important for emergencies — contacting you, leaders, or emergency services quickly if needed.</p></div></div>
+
+        <div class="item"><div class="checkbox">6</div><div><h4>Responsibility & Trust</h4><p>I completed the 30-day detox and kept my commitments. This phone is a next step in trust — I’ll follow rules and show responsibility.</p></div></div>
+      </div>
+
+      <div class="reasons" id="reasons">
+        <h3>Longer explanations</h3>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">1) Troop leadership & communication</h4>
+          <p>I serve in the troop cabinet, which means I regularly organize meetings, update schedules, and coordinate volunteers. Right now, being away from a phone makes quick responses difficult — messages can pile up on Discord and I might miss an urgent change. With a phone I can respond faster, manage tasks in real time, and be a more reliable leader. This helps the whole troop run smoother.</p>
+        </div>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">2) Creative learning & content creation</h4>
+          <p>Making videos and editing is a real skill. I want to learn filming, lighting, and editing on mobile apps (many pro creators start on phones). I already have a tripod and ideas for short clips and troop highlight reels. Owning a phone would let me practice editing, upload or backup footage, and build a small portfolio of work that could help in school projects and future creative activities.</p>
+        </div>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">3) Photography & documenting moments</h4>
+          <p>I value keeping memories — photos of trips, the crew, and special projects mean a lot. I would use the phone camera thoughtfully to document and organize photos, learn basic photography techniques like framing and lighting, and keep a clean, edited album to share with family and the troop.</p>
+        </div>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">4) Education & productivity</h4>
+          <p>With Canvas and educational apps, I can check assignments, submit work on time, and use study tools while on the go. A phone is a small but powerful productivity tool — calendars, reminders, and notes will help me be more organized and improve school performance.</p>
+        </div>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">5) Safety, contact, and independence</h4>
+          <p>Phones provide safety. Whether I'm at a troop event, walking home, or traveling to a meeting, being able to contact you or an adult quickly is important. This gives you peace of mind and teaches me how to handle responsibility for my own safety.</p>
+        </div>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">6) Limits, rules, and accountability</h4>
+          <p>I understand concerns about screen time and distraction. I'm ready to accept limits: agreed daily screen time, parental controls, and permission for app installs. I will share passwords with you and let you review settings. If I break rules, we agree to pause privileges until trust is rebuilt.</p>
+        </div>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">7) Creative extras & real skills</h4>
+          <p>Learning editing, simple graphic design, and short-form video storytelling are actual skills that help with school, future jobs, and hobbies. A phone with a camera and apps gives me a low-cost entry into building these skills rather than only consuming content.</p>
+        </div>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">8) Chores, contributions & earning it</h4>
+          <p>I'm willing to contribute: extra chores, saving allowance, or helping with family tech tasks (like setting up smart lights) to show commitment. If you want, we can set a plan where I help purchase accessories or pay a portion, which shows responsibility and ownership.</p>
+        </div>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">9) Privacy & clear expectations</h4>
+          <p>We can create a family contract: what apps are allowed, when it's off-limits, and consequences. I want clear expectations so there are no surprises. I respect not having social feeds or random apps without permission.</p>
+        </div>
+
+        <div class="reason">
+          <h4 style="margin-bottom:6px">10) Practical day-to-day help</h4>
+          <p>A phone would make logistics easier: coordinating rides, managing schedule conflicts, checking troop updates, and keeping track of meeting locations. It reduces small everyday stress and helps me be more dependable.</p>
+        </div>
+
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+        <button class="cta" onclick="document.getElementById('agreement').scrollIntoView({behavior:'smooth'})">Family agreement →</button>
+        <a class="cta" href="#" onclick="alert('Thanks for reading — tell me what you think!')">Say yes 😉</a>
+      </div>
+    </div>
+
+    <div style="height:18px"></div>
+
+    <div class="panel" id="agreement" aria-label="Agreement section">
+      <div class="kicker">Suggested family agreement</div>
+      <p class="small" style="margin-top:8px">If you approve, here is a suggested plan we can follow to keep things safe, educational, and fair:</p>
+      <ul style="margin-top:8px;list-style:decimal;padding-left:18px;color:rgba(255,255,255,0.9)">
+        <li>Daily screen time limit (we pick together).</li>
+        <li>Parental controls enabled and shared passwords.</li>
+        <li>Only approved apps: Canvas, Discord (troop), educational apps, Clash Royale.</li>
+        <li>Check-ins: I will show you my screen weekly and explain what I used it for.</li>
+        <li>Consequences: Misuse results in temporary loss until trust is fixed.</li>
+      </ul>
+      <div style="margin-top:10px;font-size:13px;color:rgba(255,255,255,0.8)"><strong>I'm ready to sign this and follow it — Niam</strong></div>
+    </div>
+  </aside>
+</div>
+
+<script>
+/* Snow canvas script - smooth, performant */
+(function(){
+  const canvas = document.getElementById('snow-canvas');
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = innerWidth;
+  let h = canvas.height = innerHeight;
+  const num = Math.min(160, Math.floor((w*h)/6000));
+  const flakes = [];
+  function rand(min,max){return Math.random()*(max-min)+min}
+  for(let i=0;i<num;i++) flakes.push({x:rand(0,w), y:rand(0,h), r:rand(0.8,3.6), d:rand(0.2,1.2), a:rand(0,Math.PI*2)});
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(let f of flakes){
+      f.y += Math.pow(f.d,1.4) + 0.3;
+      f.x += Math.sin(f.a)*0.6 + Math.cos(f.d+f.a)*0.3;
+      f.a += 0.01;
+      if(f.y > h + 6){ f.y = -10; f.x = rand(0,w) }
+      ctx.beginPath();
+      const g = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r*4);
+      g.addColorStop(0, 'rgba(255,255,255,0.9)');
+      g.addColorStop(0.6, 'rgba(255,255,255,0.6)');
+      g.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.fillStyle = g;
+      ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+  addEventListener('resize', ()=>{ w = canvas.width = innerWidth; h = canvas.height = innerHeight; });
+})();
+
+/* tiny decorative pulsing for presents */
+const presents = document.querySelectorAll('.present');
+let t = 0;
+function pulse(){
+  t += 0.03;
+  presents.forEach((p,i)=>{
+    const s = 1 + Math.sin(t + i*0.9)*0.03;
+    p.style.transform = `rotate(${ -6 + Math.sin(t + i)*1.6 }deg) scale(${s})`;
+  });
+  requestAnimationFrame(pulse);
+}
+pulse();
+</script>
+</body>
+</html>
